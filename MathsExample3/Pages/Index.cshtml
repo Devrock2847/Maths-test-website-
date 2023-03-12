@@ -1,0 +1,45 @@
+﻿@page
+@model MathsExample3.Pages.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<form method="post">
+    @{ int i = 0;}
+    @if (Model.percentage == -1)
+    {
+        <h2>Maths Exam</h2>
+        <label>Student ID</label>
+        <input asp-for="Stud.StudentID" />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var q in Model.ExamQuestions)
+                {
+                    <tr>
+                        <td><input type="hidden" value="@q.QuestionID" asp-for="@Model.StudAnswers[i].ID" /></td>
+                        <td>@q.Question</td>
+                        <td>Answer <input asp-for="@Model.StudAnswers[i].Ans" /></td>
+                        @{ i++;}
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit" asp-page-handler="Check">
+            Submit
+        </button>
+    }
+    else
+    {
+        <h1>Your grade result = @Model.percentage%</h1>
+    }
+
+
+</form>
