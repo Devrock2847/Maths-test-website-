@@ -6,7 +6,6 @@ using MathsExample3.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System.Windows.Forms;
 using Microsoft.AspNetCore.Http;
 
 namespace MathsExample3.Pages
