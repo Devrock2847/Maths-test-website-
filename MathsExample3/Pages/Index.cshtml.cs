@@ -21,6 +21,7 @@ namespace MathsExample3.Pages
         public IList<Answer> StudAnswers { get; set; }
         public decimal total = 0;
         public decimal percentage = -1;
+        public bool isTrue = false;
         public IndexModel(AppDbContext db)
         {
             _db = db;
@@ -53,7 +54,8 @@ namespace MathsExample3.Pages
             }
             else
             {
-                errorMessage = "You have already submitted";
+                isTrue = true;
+                //errorMessage = "You have already submitted";
                 //MessageBox.Show("You have already submitted");
             }
             return Page();

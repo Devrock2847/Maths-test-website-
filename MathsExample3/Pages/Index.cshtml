@@ -12,8 +12,11 @@
     {
         <h2>Maths Exam</h2>
         <label>Student ID</label>
-        <input asp-for="Stud.StudentID" />
-        <h2></h2>
+        <input asp-for="Stud.StudentID"/>
+        @if (@Model.isTrue == true)
+        {
+            <h3>You have already submitted</h3>
+        }
         <table class="table">
             <thead>
                 <tr>
