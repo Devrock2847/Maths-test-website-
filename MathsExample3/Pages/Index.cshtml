@@ -15,7 +15,7 @@
         <input asp-for="Stud.StudentID"/>
         @if (@Model.isTrue == true)
         {
-            <h3>You have already submitted</h3>
+            <h3>Student ID : @Model.Stud.StudentID , You have already submitted</h3>
         }
         <table class="table">
             <thead>
