@@ -32,7 +32,7 @@ namespace MathsExample3.Pages
         }
         public async Task<IActionResult> OnPostCheckAsync()
         {
-            //need to inser the id here so it reads the database with the studentID input
+            //need to insert the id here so it reads the database with the studentID input
             var existingStudent = _db.Students.FromSqlRaw("SELECT * FROM Students WHERE StudentID = " + Stud.StudentID).SingleOrDefault();
             if (existingStudent == null)
             {
@@ -53,6 +53,7 @@ namespace MathsExample3.Pages
             else
             {
                 //error message here
+
             }
             return Page();
         }
