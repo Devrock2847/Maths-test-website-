@@ -28,7 +28,6 @@ namespace MathsExample3.Pages
             ExamQuestions = _db.Questions.FromSqlRaw("SELECT * FROM Questions").ToList();
             //StudentIDs = _db.Students.FromSqlRaw("SELECT * FROM Students.studentID").ToList();
         }
-
         public void OnGet()
         {
         }
@@ -59,6 +58,5 @@ namespace MathsExample3.Pages
             }
             return Page();
         }
-
     }
 }
