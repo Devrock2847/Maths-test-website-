@@ -12,9 +12,12 @@
     {
         <h2>Maths Exam</h2>
         <label>Student ID</label>
-        <input asp-for="Stud.StudentID"/>
+        //Added Required here for validation
+        <input Required asp-for="Stud.StudentID"/>
+        //isTrue is a variable that checks if the StudentID is present in the database
         @if (@Model.isTrue == true)
         {
+            //Displays a message informing the user that the student ID has already been added to the database
             <h3>Student ID : @Model.Stud.StudentID , You have already submitted</h3>
         }
         <table class="table">
@@ -29,7 +32,7 @@
                     <tr>
                         <td><input type="hidden" value="@q.QuestionID" asp-for="@Model.StudAnswers[i].ID" /></td>
                         <td>@q.Question</td>
-                        <td>Answer <input asp-for="@Model.StudAnswers[i].Ans" /></td>
+                        <td>Answer <input type="number" Required asp-for="@Model.StudAnswers[i].Ans" /></td>
                         @{ i++;}
                     </tr>
                 }
@@ -41,6 +44,7 @@
     }
     else
     {
-        <h1>Your grade result = @Model.percentage%</h1>
+        //decimalFormat displays the score in 0.00 format
+        <h1>Your grade result = @Model.decimalFormat%</h1>
     }
 </form>
