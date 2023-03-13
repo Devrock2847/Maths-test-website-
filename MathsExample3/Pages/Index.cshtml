@@ -13,6 +13,7 @@
         <h2>Maths Exam</h2>
         <label>Student ID</label>
         <input asp-for="Stud.StudentID" />
+        <h2></h2>
         <table class="table">
             <thead>
                 <tr>
@@ -20,6 +21,7 @@
                 </tr>
             </thead>
             <tbody>
+
                 @foreach (var q in Model.ExamQuestions)
                 {
                     <tr>
