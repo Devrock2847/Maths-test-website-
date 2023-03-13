@@ -11,11 +11,11 @@ namespace MathsExample3.Pages
 {
     public class IndexModel : PageModel
     {
-
         private AppDbContext _db;
         [BindProperty]
         public Student Stud { get; set; }
         public IList<Qs> ExamQuestions;
+        //1public IList<Qs> StudentIDs;
         [BindProperty]
         public IList<Answer> StudAnswers { get; set; }
         public decimal total = 0;
@@ -24,29 +24,36 @@ namespace MathsExample3.Pages
         {
             _db = db;
             ExamQuestions = _db.Questions.FromSqlRaw("SELECT * FROM Questions").ToList();
+            //StudentIDs = _db.Students.FromSqlRaw("SELECT * FROM Students.studentID").ToList();
         }
 
         public void OnGet()
         {
-
         }
-
         public async Task<IActionResult> OnPostCheckAsync()
         {
-
-            foreach (Answer A in StudAnswers)
+            //need to inser the id here so it reads the database with the studentID input
+            var existingStudent = _db.Students.FromSqlRaw("SELECT * FROM Students WHERE StudentID = " + Stud.StudentID).SingleOrDefault();
+            if (existingStudent == null)
             {
-                Qs Q = await _db.Questions.FindAsync(A.ID);
-                if (Q.Answer == A.Ans)
+                foreach (Answer A in StudAnswers)
                 {
-                    total += 1;
+                    Qs Q = await _db.Questions.FindAsync(A.ID);
+                    if (Q.Answer == A.Ans)
+                    {
+                        total += 1;
+                    }
                 }
-            }
-            percentage = (total / ExamQuestions.Count) * 100;
-            Stud.Result = percentage;
-            _db.Students.Add(Stud);
-            await _db.SaveChangesAsync();
+                percentage = (total / ExamQuestions.Count) * 100;
+                Stud.Result = percentage;
 
+                _db.Students.Add(Stud);
+                await _db.SaveChangesAsync();
+            }
+            else
+            {
+                //error message here
+            }
             return Page();
         }
 
