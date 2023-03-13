@@ -38,6 +38,7 @@ namespace MathsExample3.Pages
             var existingStudent = _db.Students.FromSqlRaw("SELECT * FROM Students WHERE StudentID = " + Stud.StudentID).SingleOrDefault();
             if (existingStudent == null)
             {
+                isTrue = false;
                 foreach (Answer A in StudAnswers)
                 {
                     Qs Q = await _db.Questions.FindAsync(A.ID);
@@ -55,8 +56,6 @@ namespace MathsExample3.Pages
             else
             {
                 isTrue = true;
-                //errorMessage = "You have already submitted";
-                //MessageBox.Show("You have already submitted");
             }
             return Page();
         }
